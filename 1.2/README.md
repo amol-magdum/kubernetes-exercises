@@ -8,4 +8,4 @@
 #    docker push amolmagdum25/todo:1.0
 
 # deploy 
-# kubectl apply -f deployment.yaml
+# kubectl apply -f deployment.yaml 
