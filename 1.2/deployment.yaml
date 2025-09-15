@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+      - name: todo-app
+        image: amolmagdum25/todo:1.0
+        env:
+        - name: PORT
+          value: "9080"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-port
+spec:
+  selector:
+    app: hello-port
+  ports:
+  - name: http
+    port: 80
+    targetPort: 9080
+  type: NodePort
