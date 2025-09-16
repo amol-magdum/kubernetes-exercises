@@ -1,0 +1,16 @@
+# Use a NodePort Service to enable access to the project.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-service
+spec:
+  selector:
+    app: todo-app
+  type: NodePort
+  ports:
+  - name: http
+    port: 1234
+    targetPort: 3003
+    nodePort: 30036
+    protocol: TCP
