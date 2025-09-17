@@ -4,3 +4,4 @@
 [1.4](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.4)<br/>
 [1.5](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.5)<br/>
 [1.6](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.6)<br/>
+[1.7](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.7)<br/>
