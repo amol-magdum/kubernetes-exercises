@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: log-output-pod
+spec:
+  containers:
+  - name: log-writer
+    image: amolmagdum25/log_write_pod:1.0
+#    command: ["python", "/app/log_writer.py"]
+    volumeMounts:
+    - name: log-volume
+      mountPath: /data
+    env:
+    - name: LOG_FILE
+      value: /data/log.txt
+  - name: log-reader
+    image: amolmagdum25/log_read_pod:1.0
+#    command: ["python", "/app/log_reader.py"]
+    volumeMounts:
+    - name: log-volume
+      mountPath: /data
+    env:
+    - name: LOG_FILE
+      value: /data/log.txt
+    - name: PORT
+      value: "8080"
+  volumes:
+  - name: log-volume
+    emptyDir: {}
