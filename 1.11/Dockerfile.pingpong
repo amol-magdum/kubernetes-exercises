@@ -1,0 +1,7 @@
+# Dockerfile for ping-pong.py
+FROM python:3.12-slim
+WORKDIR /app
+COPY manifest/ping-pong.py ./ping-pong.py
+RUN pip install flask
+ENV PORT=8089
+CMD ["python", "ping-pong.py"]
