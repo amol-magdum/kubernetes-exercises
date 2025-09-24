@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-cache-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-cache
+  template:
+    metadata:
+      labels:
+        app: image-cache
+    spec:
+      containers:
+        - name: image-cache-app
+          image: amolmagdum25/todo:1.0
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: image-cache-volume
+              mountPath: /cache
+      volumes:
+        - name: image-cache-volume
+          persistentVolumeClaim:
+            claimName: project-image-cache-pvc

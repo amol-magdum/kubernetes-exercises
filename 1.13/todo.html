@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    .todo-list { margin-top: 2em; }
+    .todo-item { padding: 0.5em 0; border-bottom: 1px solid #eee; }
+    .error { color: red; margin-top: 0.5em; }
+  </style>
+</head>
+<body>
+
+  <h1>Todo App</h1>
+  <img src="/" alt="Random Image" style="max-width:100%;height:auto;display:block;margin-bottom:2em;" />
+  <input type="text" id="todoInput" maxlength="140" placeholder="Enter your todo (max 140 chars)">
+  <button id="sendBtn">Send</button>
+  <div id="errorMsg" class="error"></div>
+
+  <div class="todo-list">
+    <h2>Todos</h2>
+    <div class="todo-item">Buy groceries</div>
+    <div class="todo-item">Finish Kubernetes exercise</div>
+    <div class="todo-item">Read a book</div>
+  </div>
+
+  <script>
+    const input = document.getElementById('todoInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    sendBtn.onclick = function() {
+      if (input.value.length > 140) {
+        errorMsg.textContent = "Todo must be 140 characters or less.";
+      } else {
+        errorMsg.textContent = "";
+        // Sending logic can be added here
+      }
+    };
+  </script>
+</body>
+</html>
