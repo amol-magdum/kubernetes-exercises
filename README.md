@@ -8,3 +8,4 @@
 [1.9](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.9)<br/>
 [1.10](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.10)<br/>
 [1.11](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.11)<br/>
+[1.12](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.12)<br/>
