@@ -40,28 +40,38 @@
         <button id="add-btn">Add Todo</button>
         <div id="error-message" class="error"></div>
     </div>
+
     <div id="todo-list">
-        <div class="task">Buy groceries</div>
-        <div class="task">Complete Kubernetes setup</div>
-        <div class="task">Review Python DSA course</div>
+        <!-- Todos will be loaded here -->
     </div>
-    <div id="user-tasks"></div>
+
     <script>
-        const userTasksContainer = document.getElementById('user-tasks');
+        const todoList = document.getElementById('todo-list');
         const todoInput = document.getElementById('todo-input');
         const addBtn = document.getElementById('add-btn');
         const errorMessage = document.getElementById('error-message');
 
-        const userTasks = [];
+        // Load todos when page loads
+        function loadTodos() {
+            fetch('/api/todos')
+                .then(response => response.json())
+                .then(todos => {
+                    renderTodos(todos);
+                })
+                .catch(error => {
+                    console.error('Error fetching todos:', error);
+                    errorMessage.textContent = "Failed to load todos";
+                });
+        }
 
-        function renderUserTasks() {
-            userTasksContainer.innerHTML = "";
-            for (const task of userTasks) {
+        function renderTodos(todos) {
+            todoList.innerHTML = "";
+            todos.forEach(todo => {
                 const div = document.createElement('div');
                 div.className = 'task';
-                div.textContent = task;
-                userTasksContainer.appendChild(div);
-            }
+                div.textContent = todo;
+                todoList.appendChild(div);
+            });
         }
 
         addBtn.onclick = function() {
@@ -74,11 +84,33 @@
                 errorMessage.textContent = "Todo must be 140 characters or less.";
                 return;
             }
-            errorMessage.textContent = "";
-            userTasks.push(value);
-            renderUserTasks();
-            todoInput.value = "";
+            
+            // Send todo to backend
+            fetch('/api/todos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    errorMessage.textContent = data.error;
+                } else {
+                    errorMessage.textContent = "";
+                    todoInput.value = "";
+                    loadTodos();  // Reload the todo list
+                }
+            })
+            .catch(error => {
+                errorMessage.textContent = "Failed to add todo. Please try again.";
+                console.error('Error:', error);
+            });
         }
+
+        // Load todos when page loads
+        loadTodos();
     </script>
 </body>
 </html>

@@ -11,3 +11,4 @@
 [1.12](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.12)<br/>
 [1.13](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/1.13)<br/>
 [2.1](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/2.1)<br/>
+[2.2](https://github.com/amol-magdum/kubernetes-exercises/releases/tag/2.2)<br/>

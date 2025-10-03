@@ -1,4 +1,4 @@
-from flask import Flask, send_file, send_from_directory
+from flask import Flask, send_file, send_from_directory, request, Response
 import os
 import time
 import requests
@@ -49,6 +49,22 @@ def force_refresh():
 def serve_todo():
     return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'todo.html')
 
+@app.route('/api/todos', methods=['GET'])
+def get_todos():
+    try:
+        response = requests.get('http://todo-backend-service:3000/todos')
+        return Response(response.content, status=response.status_code, mimetype='application/json')
+    except Exception as e:
+        return {'error': str(e)}, 500
+
+@app.route('/api/todos', methods=['POST'])
+def add_todo():
+    try:
+        response = requests.post('http://todo-backend-service:3000/todos', json=request.json)
+        return Response(response.content, status=response.status_code, mimetype='application/json')
+    except Exception as e:
+        return {'error': str(e)}, 500
+
 if __name__ == "__main__":
     os.makedirs(CACHE_DIR, exist_ok=True)
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=6050)
